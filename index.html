@@ -127,12 +127,12 @@
     <header>
       <div>
         <h1>Gyro Tetris</h1>
-        <p class="lead">A motion-control Android Tetris prototype. Tilt to move, spin the phone to rotate, preview the landing spot, hard-drop with volume keys, and compare scores through Firebase leaderboard support.</p>
+        <p class="lead">A motion-control Android Tetris prototype. Tilt to move, spin the phone to rotate, preview the landing spot, hard-drop with volume keys, and challenge friends through room-code multiplayer.</p>
         <a class="download" href="./release/gyro-tetris-debug.apk">Download APK</a>
       </div>
       <div class="status">
         <strong>Current build</strong>
-        <div class="muted">Firebase anonymous login, global ranking, combo scoring, smooth rotation, landing ghost, preview settings, pause/retry, and hold-to-lock input.</div>
+        <div class="muted">Firebase anonymous login, global ranking, room-code multiplayer, combo scoring, smooth rotation, landing ghost, preview settings, pause/retry, and hold-to-lock input.</div>
       </div>
     </header>
 
@@ -144,7 +144,7 @@
         <div class="card"><b>Hard drop</b><span>Press volume up and volume down together.</span></div>
         <div class="card"><b>Settings</b><span>Use SET to tune movement and rotation sensitivity with a live preview.</span></div>
         <div class="card"><b>Lock input</b><span>Hold the screen to freeze tilt and rotation input while the piece keeps falling.</span></div>
-        <div class="card"><b>Leaderboard</b><span>Use RANK in the app to view Firebase global scores.</span></div>
+        <div class="card"><b>Multiplayer</b><span>Use MULTI to create a room code or join a friend's code. Every 2 cleared lines sends 1 garbage line.</span></div>
       </div>
     </section>
 
@@ -152,6 +152,12 @@
       <h2>Leaderboard</h2>
       <p class="muted">The Android app now uses Firebase Anonymous Auth and Cloud Firestore. Enter a nickname in the app, play a round, and your best score can appear in the global ranking.</p>
       <span class="badge">Firebase enabled</span>
+    </section>
+
+    <section>
+      <h2>Room Battles</h2>
+      <p class="muted">The app also uses Firebase Realtime Database for private room-code matches. One phone creates a room, the other joins with the code shown in the game, and garbage lines sync during play.</p>
+      <span class="badge">Room codes enabled</span>
     </section>
   </main>
 </body>
