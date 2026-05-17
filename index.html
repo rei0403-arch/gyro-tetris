@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,6 +74,26 @@
       text-decoration: none;
     }
 
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .actions .download { margin-top: 0; }
+
+    button.download {
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .download.secondary {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
     .status,
     .card {
       background: var(--panel);
@@ -103,6 +123,31 @@
     .card span,
     .muted { color: var(--muted); line-height: 1.45; }
 
+    .install {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .steps {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .linkbox {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0b0e13;
+      color: var(--text);
+      font: 14px ui-monospace, SFMono-Regular, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
     .badge {
       display: inline-flex;
       align-items: center;
@@ -117,7 +162,8 @@
 
     @media (max-width: 760px) {
       header,
-      .grid { grid-template-columns: 1fr; }
+      .grid,
+      .install { grid-template-columns: 1fr; }
       header { min-height: auto; padding-top: 12px; }
     }
   </style>
@@ -127,38 +173,86 @@
     <header>
       <div>
         <h1>Gyro Tetris</h1>
-        <p class="lead">A motion-control Android Tetris prototype. Tilt to move, spin the phone to rotate, preview the landing spot, hard-drop with volume keys, and challenge friends through room-code multiplayer.</p>
-        <a class="download" href="./release/gyro-tetris-debug.apk">Download APK</a>
+        <p class="lead">폰을 기울여 움직이고, 폰을 돌려 회전하는 안드로이드 테트리스. 방 코드로 친구랑 대전하고, 2줄을 지울 때마다 상대에게 잉여블록을 보낼 수 있어.</p>
+        <div class="actions">
+          <a class="download" href="./release/gyro-tetris-debug.apk">APK 다운로드</a>
+          <button class="download secondary" type="button" id="shareButton">친구에게 링크 공유</button>
+        </div>
+        <div class="linkbox" id="shareLink">https://rei0403-arch.github.io/gyro-tetris/</div>
       </div>
       <div class="status">
-        <strong>Current build</strong>
-        <div class="muted">Firebase anonymous login, global ranking, room-code multiplayer, combo scoring, smooth rotation, landing ghost, preview settings, pause/retry, and hold-to-lock input.</div>
+        <strong>현재 빌드</strong>
+        <div class="muted">Firebase 익명 로그인, 전체 랭킹, 방 코드 멀티, 콤보 점수, 자연 회전, 낙하 미리보기, 감도 설정, 일시정지/리트라이, 꾹 눌러 입력 잠금 포함.</div>
       </div>
     </header>
 
     <section>
-      <h2>Controls</h2>
-      <div class="grid">
-        <div class="card"><b>Move</b><span>Tilt the phone left or right. Stronger tilt moves faster.</span></div>
-        <div class="card"><b>Rotate</b><span>Spin the phone smoothly. The locked piece snaps to the nearest right angle.</span></div>
-        <div class="card"><b>Hard drop</b><span>Press volume up and volume down together.</span></div>
-        <div class="card"><b>Settings</b><span>Use SET to tune movement and rotation sensitivity with a live preview.</span></div>
-        <div class="card"><b>Lock input</b><span>Hold the screen to freeze tilt and rotation input while the piece keeps falling.</span></div>
-        <div class="card"><b>Multiplayer</b><span>Use MULTI to create a room code or join a friend's code. Every 2 cleared lines sends 1 garbage line.</span></div>
+      <h2>친구 설치 방법</h2>
+      <div class="install">
+        <div class="card">
+          <b>보내는 사람</b>
+          <ol class="steps">
+            <li>이 페이지 링크를 친구에게 보내기</li>
+            <li>친구가 APK 다운로드를 누르게 하기</li>
+            <li>설치가 끝나면 둘 다 MULTI로 같은 방 코드에 들어가기</li>
+          </ol>
+        </div>
+        <div class="card">
+          <b>받는 사람</b>
+          <ol class="steps">
+            <li>안드로이드 폰에서 링크 열기</li>
+            <li>APK 다운로드 후 열기</li>
+            <li>설치 차단이 뜨면 브라우저의 앱 설치 허용 켜기</li>
+            <li>뒤로 가서 설치 누르기</li>
+          </ol>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Leaderboard</h2>
-      <p class="muted">The Android app now uses Firebase Anonymous Auth and Cloud Firestore. Enter a nickname in the app, play a round, and your best score can appear in the global ranking.</p>
+      <h2>조작</h2>
+      <div class="grid">
+        <div class="card"><b>이동</b><span>폰을 좌우로 기울이기. 많이 기울일수록 더 빠르게 움직여.</span></div>
+        <div class="card"><b>회전</b><span>폰을 자연스럽게 돌리기. 블록이 놓일 때는 가장 가까운 직각으로 고정돼.</span></div>
+        <div class="card"><b>빠른 낙하</b><span>음량 위/아래 버튼을 동시에 누르기.</span></div>
+        <div class="card"><b>설정</b><span>SET에서 이동/회전 감도를 미리보기 보면서 조절.</span></div>
+        <div class="card"><b>입력 잠금</b><span>화면을 꾹 누르는 동안 기울기/회전 입력이 멈춰.</span></div>
+        <div class="card"><b>멀티</b><span>MULTI로 방을 만들거나 친구 방 코드에 입장. 2줄마다 잉여블록 1줄 전송.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>랭킹</h2>
+      <p class="muted">앱은 Firebase Anonymous Auth와 Cloud Firestore를 사용해. 앱에서 닉네임을 입력하고 플레이하면 최고 점수가 전체 랭킹에 올라갈 수 있어.</p>
       <span class="badge">Firebase enabled</span>
     </section>
 
     <section>
-      <h2>Room Battles</h2>
-      <p class="muted">The app also uses Firebase Realtime Database for private room-code matches. One phone creates a room, the other joins with the code shown in the game, and garbage lines sync during play.</p>
+      <h2>방 코드 대전</h2>
+      <p class="muted">멀티는 Firebase Realtime Database를 사용해. 한 명이 방을 만들고, 다른 한 명이 화면에 나온 코드를 입력하면 플레이 중 잉여블록이 동기화돼.</p>
       <span class="badge">Room codes enabled</span>
     </section>
   </main>
+  <script>
+    const shareUrl = "https://rei0403-arch.github.io/gyro-tetris/";
+    const shareButton = document.getElementById("shareButton");
+
+    shareButton.addEventListener("click", async () => {
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: "Gyro Tetris",
+            text: "방 코드 멀티 가능한 자이로 테트리스 APK 받아봐",
+            url: shareUrl
+          });
+          return;
+        }
+        await navigator.clipboard.writeText(shareUrl);
+        shareButton.textContent = "링크 복사됨";
+      } catch (error) {
+        shareButton.textContent = "링크를 길게 눌러 복사";
+      }
+    });
+  </script>
 </body>
 </html>
