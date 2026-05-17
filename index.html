@@ -161,7 +161,7 @@
     <header>
       <div>
         <h1>자이로 테트리스</h1>
-        <p class="lead">폰을 기울여 움직이고, 폰을 돌려 회전하는 안드로이드 테트리스. 앱을 켜면 싱글플레이와 멀티플레이를 고를 수 있고, 멀티 방 코드는 숫자 6자리로 나와.</p>
+        <p class="lead">폰을 기울여 움직이고, 폰을 돌려 회전하는 안드로이드 테트리스. 싱글플레이와 숫자 6자리 방 코드 멀티플레이를 지원하고, 멀티에서는 승리/패배가 자동으로 표시돼.</p>
         <div class="actions">
           <a class="download" href="./release/gyro-tetris-debug.apk">APK 다운로드</a>
           <button class="download secondary" type="button" id="shareButton">친구에게 링크 공유</button>
@@ -170,7 +170,7 @@
       </div>
       <div class="status">
         <strong>현재 빌드</strong>
-        <div class="muted">시작화면, 싱글/멀티 선택, 숫자 방 코드, 상대 입장 전 대기, 전체 랭킹, 콤보 점수, 낙하 미리보기, 감도 설정, 일시정지/다시시작 포함.</div>
+        <div class="muted">시작화면, 싱글/멀티 선택, 숫자 방 코드, 상대 입장 전 대기, 승리/패배 화면, 멀티 다시하기 비활성화, 창이 열려 있을 때 일시정지, 전체 랭킹 포함.</div>
       </div>
     </header>
 
@@ -204,6 +204,15 @@
         <div class="card"><b>싱글플레이</b><span>혼자 바로 시작해. 앱을 켜도 플레이 버튼을 누르기 전까지는 게임이 시작되지 않아.</span></div>
         <div class="card"><b>멀티플레이</b><span>방을 만들거나 친구의 숫자 6자리 코드를 입력해서 들어가.</span></div>
         <div class="card"><b>대기</b><span>멀티는 상대가 들어오기 전까지 블록이 떨어지지 않고 멈춰 있어.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>멀티 승패</h2>
+      <div class="grid">
+        <div class="card"><b>자동 종료</b><span>한 명이 게임오버 되면 상대 화면도 라운드가 끝나고 승리 또는 패배가 표시돼.</span></div>
+        <div class="card"><b>다시하기 제한</b><span>멀티 중에는 다시 버튼이 비활성화돼. 새 판은 방을 다시 만들거나 나간 뒤 시작하면 돼.</span></div>
+        <div class="card"><b>창 열림 정지</b><span>설정, 랭킹, 닉네임, 멀티 메뉴 같은 창이 떠 있으면 블록 낙하와 입력이 잠시 멈춰.</span></div>
       </div>
     </section>
 
